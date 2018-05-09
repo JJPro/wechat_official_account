@@ -1,3 +1,3 @@
-defmodule WechatOfficialWeb.PageView do
+defmodule WechatOfficialWeb.WechatView do
   use WechatOfficialWeb, :view
 end
