@@ -9,13 +9,13 @@ defmodule WechatOfficialWeb.WechatController do
   end
 
   def create(conn, _params) do
-    _params  |> IO.inspect(label: ">>>>> params")
-    msg = conn.body_params |> IO.inspect(label: ">>>>> conn.body_params")
-    reply = build_text_reply(msg, msg.content)
+    # _params  |> IO.inspect(label: ">>>>> params")
+    msg = conn.body_params# |> IO.inspect(label: ">>>>> conn.body_params")
+    reply = build_text_reply(msg)
     render conn, "text.xml", reply: reply
   end
 
-  defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from}, content) do
+  defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
     %{from: to, to: from, content: content}
   end
 end
