@@ -51,8 +51,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :wechat_official, WechatOfficial.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "wechat",
+  password: "wechat",
   database: "wechat_official_dev",
   hostname: "localhost",
   pool_size: 10
