@@ -20,7 +20,13 @@ defmodule WechatOfficialWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WechatOfficialWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", WechatOfficialWeb do
+    pipe_through :api
+
+    # validate wechat server config
+    get "/", WechatController, :index
+
+    # receive wechat push message
+    post "/", WechatController, :create
+  end
 end
