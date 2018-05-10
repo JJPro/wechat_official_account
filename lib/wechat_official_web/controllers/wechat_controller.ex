@@ -16,6 +16,7 @@ defmodule WechatOfficialWeb.WechatController do
   end
 
   defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
-    %{from: to, to: from, content: content}
+    # FromUserName is user's OpenID to our official account
+    %{from: to, to: from, content: "Hi thanks for your content " <> content}
   end
 end
