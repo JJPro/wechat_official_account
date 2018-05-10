@@ -20,13 +20,12 @@ defmodule WechatOfficialWeb.WechatController do
         end
       "image" ->
         with %{"PicUrl" => image, "MediaId" => mediaId, "FromUserName" => from, "ToUserName" => to} <- msg do
-          # render conn, "image.xml", reply: %{from: to, to: from, image: image, mediaId: mediaId} |> IO.inspect(label: ">>>>> template")
-          Wechat.Message.Custom.send_image(from, mediaId)
-          conn
+          render conn, "image.xml", reply: %{from: to, to: from, image: image, mediaId: mediaId} |> IO.inspect(label: ">>>>> template")
+          # Wechat.Message.Custom.send_image(from, mediaId)
+          # conn
         end
       _ -> conn
     end
-    conn
   end
 
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
