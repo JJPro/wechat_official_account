@@ -30,10 +30,10 @@ defmodule WechatOfficialWeb.WechatController do
 
   def create(conn, _) do
     msg = conn.body_params
-    reply(msg)
+    reply(conn, msg)
   end
 
-  defp reply(%{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
+  defp reply(conn, %{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
     render conn, "text.xml", reply: %{from: to, to: from, content: content}
   end
 
