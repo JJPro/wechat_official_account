@@ -48,7 +48,7 @@ defmodule WechatOfficialWeb.WechatController do
   #   render conn, "image.xml", reply: %{from: to, to: from, media_id: url}
   # end
 
-  # catch invalid requests
+  # catch all other message types
   defp reply(conn, _) do
     text conn, "success"
   end
