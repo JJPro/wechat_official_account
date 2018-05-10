@@ -1,7 +1,9 @@
 <xml>
   <MsgType><![CDATA[image]]></MsgType>
   <Image>
-    <MediaId><![CDATA[<%= @reply.media_id %>]]</MediaId>
+    <MediaId>
+      <![CDATA[<%= @reply.media_id %>]]>
+    </MediaId>
   </Image>
   <ToUserName><![CDATA[<%= @reply.to %>]]></ToUserName>
   <FromUserName><![CDATA[<%= @reply.from %>]]></FromUserName>
