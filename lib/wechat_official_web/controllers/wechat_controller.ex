@@ -35,8 +35,8 @@ defmodule WechatOfficialWeb.WechatController do
 
   defp reply(conn, %{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
     # render conn, "text.xml", reply: %{from: to, to: from, content: text}
-    Wechat.Message.Custom.send_mpnews(from, "VyOYSDWqZLEsrsL91yui9aOoGTMyV07Cn3hKxCGyUN6xkjoKmQVekpZk_qF0aaqA")
-    conn
+    Wechat.Message.Custom.send_image(from, "VyOYSDWqZLEsrsL91yui9aOoGTMyV07Cn3hKxCGyUN6xkjoKmQVekpZk_qF0aaqA")
+
   end
 
   defp reply(conn, %{"MsgType" => "image", "MediaId" => media_id, "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
