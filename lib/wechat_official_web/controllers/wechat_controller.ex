@@ -37,6 +37,11 @@ defmodule WechatOfficialWeb.WechatController do
     render conn, "text.xml", reply: %{from: to, to: from, content: text}
   end
 
+  defp reply(conn, %{"MsgType" => "image", "MediaId" => media_id, "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
+    render conn, "image.xml", reply: %{from: to, to: from, media_id: media_id}
+  end
+
+
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
   #   # FromUserName is user's OpenID to our official account
   #   %{from: to, to: from, content: "Hi thanks for your \n content " <> content}
