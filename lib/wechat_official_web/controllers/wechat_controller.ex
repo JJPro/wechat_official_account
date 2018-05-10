@@ -5,14 +5,15 @@ defmodule WechatOfficialWeb.WechatController do
   plug Wechat.Plugs.MessageParser when action in [:create]
 
   def index(conn, %{"echostr" => echostr}) do
-    text conn, echostr
+    text conn, echostr |> IO.inspect(label: ">>>>> echostr")
   end
 
   def create(conn, _params) do
     # _params  |> IO.inspect(label: ">>>>> params")
     msg = conn.body_params |> IO.inspect(label: ">>>>> conn.body_params")
     reply = build_text_reply(msg)
-    render conn, "text.xml", reply: reply
+    # render conn, "text.xml", reply: reply
+    Wechat.Message.Custom.send_text(msg["FromUserName"], "hi there")
   end
 
   defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
