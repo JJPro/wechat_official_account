@@ -42,9 +42,14 @@ defmodule WechatOfficialWeb.WechatController do
   defp reply(conn, %{"MsgType" => "image", "MediaId" => media_id, "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
     render conn, "image.xml", reply: %{from: to, to: from, media_id: media_id}
   end
+  # 
+  # defp reply(conn, %{"MsgType" => "image", "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
+  #   render conn, "image.xml", reply: %{from: to, to: from, media_id: url}
+  # end
 
-  defp reply(conn, %{"MsgType" => "image", "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
-    render conn, "image.xml", reply: %{from: to, to: from, media_id: url}
+  # catch invalid requests
+  defp reply(conn, _) do
+    text conn, "success"
   end
 
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
