@@ -29,7 +29,7 @@ defmodule WechatOfficialWeb.WechatController do
   # end
 
   def create(conn, _) do
-    msg = conn.body_params
+    msg = conn.body_params |> IO.inspect(label: ">>>>> msg")
     reply(conn, msg)
   end
 
