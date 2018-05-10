@@ -22,6 +22,7 @@ defmodule WechatOfficialWeb.WechatController do
         with %{"PicUrl" => image, "MediaId" => mediaId, "FromUserName" => from, "ToUserName" => to} <- msg do
           render conn, "image.xml", reply: %{from: to, to: from, image: image, mediaId: mediaId} |> IO.inspect(label: ">>>>> template")
         end
+      _ -> conn
     end
   end
 
