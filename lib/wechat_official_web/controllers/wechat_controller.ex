@@ -34,6 +34,7 @@ defmodule WechatOfficialWeb.WechatController do
   end
 
   defp reply(conn, %{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
+    Wechat.Message.Custom.send_link(from, "http://jjpro.net")
     render conn, "text.xml", reply: %{from: to, to: from, content: text}
     # Wechat.Message.Custom.send_image(from, "VyOYSDWqZLEsrsL91yui9aOoGTMyV07Cn3hKxCGyUN6xkjoKmQVekpZk_qF0aaqA")
 
@@ -42,7 +43,7 @@ defmodule WechatOfficialWeb.WechatController do
   defp reply(conn, %{"MsgType" => "image", "MediaId" => media_id, "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
     render conn, "image.xml", reply: %{from: to, to: from, media_id: media_id}
   end
-  # 
+  #
   # defp reply(conn, %{"MsgType" => "image", "PicUrl" => url, "ToUserName" => to, "FromUserName" => from}) do
   #   render conn, "image.xml", reply: %{from: to, to: from, media_id: url}
   # end
