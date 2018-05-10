@@ -57,4 +57,4 @@ config :wechat_official, WechatOfficial.Repo,
   hostname: "localhost",
   pool_size: 10
 
-import_config "shared.secret.exs"
+import_config "dev.secret.exs"
