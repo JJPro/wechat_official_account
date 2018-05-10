@@ -14,6 +14,7 @@ defmodule WechatOfficialWeb.WechatController do
     reply = build_text_reply(msg)
     # render conn, "text.xml", reply: reply
     Wechat.Message.Custom.send_text(msg["FromUserName"], "hi there")
+    conn
   end
 
   defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
