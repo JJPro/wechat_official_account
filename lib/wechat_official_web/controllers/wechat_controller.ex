@@ -26,6 +26,7 @@ defmodule WechatOfficialWeb.WechatController do
         end
       _ -> conn
     end
+    conn
   end
 
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
