@@ -9,7 +9,7 @@ defmodule WechatOfficialWeb.WechatController do
   end
 
   def create(conn, _params) do
-    # _params  |> IO.inspect(label: ">>>>> params")
+    _params  |> IO.inspect(label: ">>>>> params")
     msg = conn.body_params |> IO.inspect(label: ">>>>> conn.body_params")
     reply = build_text_reply(msg)
     render conn, "text.xml", reply: reply
