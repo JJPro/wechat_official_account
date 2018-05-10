@@ -10,18 +10,28 @@ defmodule WechatOfficialWeb.WechatController do
 
   def create(conn, _params) do
     # _params  |> IO.inspect(label: ">>>>> params")
-    msg = conn.body_params |> IO.inspect(label: ">>>>> msg = conn.body_params")
-    reply = build_text_reply(msg)
-    render conn, "text.xml", reply: reply
+    msg = conn.body_params |> IO.inspect(label: ">>>>> msg")
+
+    case msg["MsgType"] do
+      "text" ->
+        with %{"Content" => content, "FromUserName" => from, "ToUserName" => to} <- msg do
+          # do something with user content
+          render conn, "text.xml", reply: %{from: to, to: from, content: content}
+        end
+      "image" ->
+        with %{"PicUrl" => image, "MediaId" => mediaId, "FromUserName" => from, "ToUserName" => to} <- msg do
+          render conn, "image.xml", reply: %{from: to, to: from, image: image}
+        end
+    end
   end
 
-  defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
-    # FromUserName is user's OpenID to our official account
-    %{from: to, to: from, content: "Hi thanks for your \n content " <> content}
-  end
-
-  defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "PicUrl" => url}) do
-    # FromUserName is user's OpenID to our official account
-    %{from: to, to: from, content: "Hi thanks for your \n content " <> url}
-  end
+  # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
+  #   # FromUserName is user's OpenID to our official account
+  #   %{from: to, to: from, content: "Hi thanks for your \n content " <> content}
+  # end
+  #
+  # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "PicUrl" => url}) do
+  #   # FromUserName is user's OpenID to our official account
+  #   %{from: to, to: from, content: "Hi thanks for your \n content " <> url}
+  # end
 end
