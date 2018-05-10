@@ -8,24 +8,33 @@ defmodule WechatOfficialWeb.WechatController do
     text conn, echostr |> IO.inspect(label: ">>>>> echostr")
   end
 
-  def create(conn, _params) do
-    # _params  |> IO.inspect(label: ">>>>> params")
-    msg = conn.body_params |> IO.inspect(label: ">>>>> msg")
+  # def create(conn, _params) do
+  #   # _params  |> IO.inspect(label: ">>>>> params")
+  #   msg = conn.body_params |> IO.inspect(label: ">>>>> msg")
+  #
+  #   case msg["MsgType"] do
+  #     "text" ->
+  #       with %{"Content" => content, "FromUserName" => from, "ToUserName" => to} <- msg do
+  #         # do something with user content
+  #         render conn, "text.xml", reply: %{from: to, to: from, content: content}
+  #       end
+  #     "image" ->
+  #       with %{"PicUrl" => image, "MediaId" => mediaId, "FromUserName" => from, "ToUserName" => to} <- msg do
+  #         render conn, "image.xml", reply: %{from: to, to: from, image: image, mediaId: mediaId}
+  #         # Wechat.Message.Custom.send_image(from, mediaId)
+  #         # conn
+  #       end
+  #     _ -> conn
+  #   end
+  # end
 
-    case msg["MsgType"] do
-      "text" ->
-        with %{"Content" => content, "FromUserName" => from, "ToUserName" => to} <- msg do
-          # do something with user content
-          render conn, "text.xml", reply: %{from: to, to: from, content: content}
-        end
-      "image" ->
-        with %{"PicUrl" => image, "MediaId" => mediaId, "FromUserName" => from, "ToUserName" => to} <- msg do
-          render conn, "image.xml", reply: %{from: to, to: from, image: image, mediaId: mediaId}
-          # Wechat.Message.Custom.send_image(from, mediaId)
-          # conn
-        end
-      _ -> conn
-    end
+  def create(conn, _) do
+    msg = conn.body_params
+    reply(msg)
+  end
+
+  defp reply(%{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
+    render conn, "text.xml", reply: %{from: to, to: from, content: content}
   end
 
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
