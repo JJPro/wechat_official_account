@@ -12,9 +12,8 @@ defmodule WechatOfficialWeb.WechatController do
     # _params  |> IO.inspect(label: ">>>>> params")
     msg = conn.body_params |> IO.inspect(label: ">>>>> conn.body_params")
     reply = build_text_reply(msg)
-    # render conn, "text.xml", reply: reply
     Wechat.Message.Custom.send_text(msg["FromUserName"], "hi there")
-    conn
+    render conn, "text.xml", reply: reply
   end
 
   defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
