@@ -34,7 +34,7 @@ defmodule WechatOfficialWeb.WechatController do
   end
 
   defp reply(conn, %{"Content" => text, "ToUserName" => to, "FromUserName" => from}) do
-    render conn, "text.xml", reply: %{from: to, to: from, content: content}
+    render conn, "text.xml", reply: %{from: to, to: from, content: text}
   end
 
   # defp build_text_reply(%{"ToUserName" => to, "FromUserName" => from, "Content" => content}) do
